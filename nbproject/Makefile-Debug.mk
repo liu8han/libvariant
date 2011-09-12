@@ -37,6 +37,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/src/platform/osx/osxplatform.o \
 	${OBJECTDIR}/tinyxml/tinyxml.o \
 	${OBJECTDIR}/tinyxml/tinyxmlerror.o \
+	${OBJECTDIR}/src/base64.o \
 	${OBJECTDIR}/src/variant.o \
 	${OBJECTDIR}/tinyxml/tinyxmlparser.o \
 	${OBJECTDIR}/src/platform/baseplatform.o
@@ -56,7 +57,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=-lcrypto.0.9.8
+LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -80,6 +81,11 @@ ${OBJECTDIR}/tinyxml/tinyxmlerror.o: tinyxml/tinyxmlerror.cpp
 	${MKDIR} -p ${OBJECTDIR}/tinyxml
 	${RM} $@.d
 	$(COMPILE.cc) -g -DOSX -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/tinyxml/tinyxmlerror.o tinyxml/tinyxmlerror.cpp
+
+${OBJECTDIR}/src/base64.o: src/base64.c 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.c) -g -DOSX -Iinclude -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/base64.o src/base64.c
 
 ${OBJECTDIR}/src/variant.o: src/variant.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src

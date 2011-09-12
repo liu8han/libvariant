@@ -21,6 +21,7 @@
       <logicalFolder name="f2" displayName="tinyxml" projectFiles="true">
         <itemPath>tinyxml/tinyxml.h</itemPath>
       </logicalFolder>
+      <itemPath>include/base64.h</itemPath>
       <itemPath>include/defines.h</itemPath>
       <itemPath>include/variant.h</itemPath>
       <itemPath>include/variantmap.h</itemPath>
@@ -43,6 +44,7 @@
         <itemPath>tinyxml/tinyxmlerror.cpp</itemPath>
         <itemPath>tinyxml/tinyxmlparser.cpp</itemPath>
       </logicalFolder>
+      <itemPath>src/base64.c</itemPath>
       <itemPath>src/variant.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -81,11 +83,6 @@
             <Elem>OSX</Elem>
           </preprocessorList>
         </ccTool>
-        <linkerTool>
-          <linkerLibItems>
-            <linkerLibLibItem>crypto.0.9.8</linkerLibLibItem>
-          </linkerLibItems>
-        </linkerTool>
       </compileType>
     </conf>
     <conf name="Release" type="2">
