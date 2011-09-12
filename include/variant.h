@@ -24,17 +24,10 @@
 #include "platform/platform.h"
 #include "defines.h"
 
-#ifdef LOG_VARIANT_MEMORY_MANAGEMENT
-#define CONSTRUCTOR		printf(" +  %u->%u\n",_constructorCount,_constructorCount+1); _constructorCount++;
-#define DESTRUCTOR		printf(" -  %u->%u\n",_constructorCount,_constructorCount-1); _constructorCount--;
-#define DYNAMIC_ALLOC(type)	printf("(+) %u->%u (%s)\n",_dynamicAllocationCount,_dynamicAllocationCount+1,type); _dynamicAllocationCount++;
-#define DYNAMIC_FREE(type)	printf("(-) %u->%u (%s)\n",_dynamicAllocationCount,_dynamicAllocationCount-1,type); _dynamicAllocationCount--;
-#else
 #define CONSTRUCTOR
 #define DESTRUCTOR
 #define DYNAMIC_ALLOC(type)
 #define DYNAMIC_FREE(type)
-#endif
 
 typedef enum _VariantType {
 	V_NULL = VAR_ENUM_VALUE_NULL,
