@@ -1,6 +1,10 @@
-/* 
+/*
+ *  Copyright (c) 2010,
+ *  Gavriloaie Eugen-Andrei (shiretu@gmail.com)
+ *  
  *  Copyright (c) 2011,
  *  Han Liu (cn.liuhan@gmail.com)
+ *
  *
  *  This file is changed from crtmpserver (http://www.rtmpd.com/)
  *  crtmpserver is free software: you can redistribute it and/or modify
@@ -182,6 +186,12 @@ public:
 			Variant &result);
 	static bool DeserializeFromXml(string data, Variant &result);
 	bool SerializeToXml(string &result, bool prettyPrint = true);
+        
+	static bool DeserializeFromBinFile(string path, Variant &variant);
+	bool SerializeToBinFile(string fileName);
+
+	static bool DeserializeFromXmlFile(string path, Variant &variant);
+	bool SerializeToXmlFile(string fileName);        
 
 	static bool DeserializeFromJSON(string &raw, Variant &result, uint32_t &start);
 	bool SerializeToJSON(string &result);

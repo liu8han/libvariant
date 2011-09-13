@@ -23,6 +23,7 @@
       </logicalFolder>
       <itemPath>include/base64.h</itemPath>
       <itemPath>include/defines.h</itemPath>
+      <itemPath>include/file.h</itemPath>
       <itemPath>include/variant.h</itemPath>
       <itemPath>include/variantmap.h</itemPath>
     </logicalFolder>
@@ -45,6 +46,7 @@
         <itemPath>tinyxml/tinyxmlparser.cpp</itemPath>
       </logicalFolder>
       <itemPath>src/base64.c</itemPath>
+      <itemPath>src/file.cpp</itemPath>
       <itemPath>src/variant.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"

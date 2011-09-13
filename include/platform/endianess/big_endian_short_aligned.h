@@ -1,7 +1,11 @@
 /* 
+ *  Copyright (c) 2010,
+ *  Gavriloaie Eugen-Andrei (shiretu@gmail.com)
+ *
  *  Copyright (c) 2011,
  *  Han Liu (cn.liuhan@gmail.com)
  *
+ * 
  *  This file is changed from crtmpserver (http://www.rtmpd.com/)
  *  crtmpserver is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by

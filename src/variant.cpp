@@ -1,7 +1,11 @@
 /* 
+ *  Copyright (c) 2010,
+ *  Gavriloaie Eugen-Andrei (shiretu@gmail.com)
+ *  
  *  Copyright (c) 2011,
  *  Han Liu (cn.liuhan@gmail.com)
  *
+ * 
  *  This file is changed from crtmpserver (http://www.rtmpd.com/)
  *  crtmpserver is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -22,6 +26,7 @@
 #include "variant.h"
 #include "variantmap.h"
 #include "base64.h"
+#include "file.h"
 
 #define TIXML_USE_STL
 #include "../tinyxml/tinyxml.h"
@@ -2273,6 +2278,110 @@ bool Variant::DeserializeFromXml (TiXmlElement *pNode, Variant &variant)
     {
         return false;
     }
+}
+
+bool Variant::DeserializeFromBinFile(string path, Variant &variant) {
+	//1. Open the file
+	File file;
+	if (!file.Initialize(path)) {
+		return false;
+	}
+
+	if (file.Size() >= 0x100000000LL) {
+		return false;
+	}
+
+	//2. Allocate memory
+	uint8_t *pBuffer = new uint8_t[(uint32_t) file.Size()];
+
+	//3. Read the content
+	if (!file.ReadBuffer((uint8_t *) pBuffer, file.Size())) {
+		return false;
+	}
+
+	//4. Prepare the string
+	string raw = string((char *) pBuffer, (uint32_t) file.Size());
+
+	//8. Dispose the buffer
+	delete[] pBuffer;
+
+	//9. read the variant from the buffer
+	variant.Reset();
+	return DeserializeFromBin(raw, variant);
+}
+
+bool Variant::SerializeToBinFile(string fileName) {
+	string rawContent = "";
+
+	if (!SerializeToBin(rawContent)) {
+		return false;
+	}
+
+	File file;
+	if (!file.Initialize(fileName, FILE_OPEN_MODE_TRUNCATE)) {
+		return false;
+	}
+
+	if (!file.WriteString(rawContent)) {
+		return false;
+	}
+
+	return true;
+}
+
+bool Variant::DeserializeFromXmlFile(string path, Variant &variant) {
+	//1. Open the file
+	File file;
+	if (!file.Initialize(path)) {
+		return false;
+	}
+
+	//2. Check his size
+	if (file.Size() == 0) {
+		variant.Reset();
+		return true;
+	}
+
+	if (file.Size() > 1024 * 1024 * 4) {
+		return false;
+	}
+
+	//3. Allocate memory
+	uint8_t *pBuffer = new uint8_t[(uint32_t) file.Size() + 1];
+
+	//4. Read the content
+	if (!file.ReadBuffer((uint8_t *) pBuffer, file.Size())) {
+		delete[] pBuffer;
+		return false;
+	}
+	pBuffer[file.Size()] = 0;
+
+	//5. read the variant from the buffer
+	variant.Reset();
+	bool result = DeserializeFromXml(pBuffer, (uint32_t) file.Size(), variant);
+
+	//8. Dispose the buffer
+	delete[] pBuffer;
+
+	return result;
+}
+
+bool Variant::SerializeToXmlFile(string fileName) {
+	string rawContent = "";
+	if (!SerializeToXml(rawContent, true)) {
+		return false;
+	}
+
+	File file;
+	if (!file.Initialize(fileName, FILE_OPEN_MODE_TRUNCATE)) {
+		return false;
+	}
+
+	if (!file.WriteString(rawContent)) {
+		return false;
+	}
+
+	return true;
 }
 
 void Variant::InternalCopy (const Variant &val)

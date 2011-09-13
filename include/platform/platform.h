@@ -1,6 +1,10 @@
 /* 
+ *  Copyright (c) 2010,
+ *  Gavriloaie Eugen-Andrei (shiretu@gmail.com)
+ * 
  *  Copyright (c) 2011,
  *  Han Liu (cn.liuhan@gmail.com)
+ * 
  *
  *  This file is changed from crtmpserver (http://www.rtmpd.com/)
  *  crtmpserver is free software: you can redistribute it and/or modify
@@ -27,5 +31,10 @@
 #include "./osx/osxplatform.h"
 #define Platform OSXPlatform
 #endif /* OSX */
+
+#ifdef LINUX
+#include "./linux/linuxplatform.h"
+#define Platform LINUXPlatform
+#endif /* LINUX */
 
 #endif /* _PLATFORM_H */

@@ -34,6 +34,7 @@ OBJECTDIR=${CND_BUILDDIR}/${CND_CONF}/${CND_PLATFORM}
 
 # Object Files
 OBJECTFILES= \
+	${OBJECTDIR}/src/file.o \
 	${OBJECTDIR}/src/platform/osx/osxplatform.o \
 	${OBJECTDIR}/tinyxml/tinyxml.o \
 	${OBJECTDIR}/tinyxml/tinyxmlerror.o \
@@ -66,6 +67,11 @@ LDLIBSOPTIONS=
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibvariant.dylib: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
 	${LINK.cc} -dynamiclib -install_name liblibvariant.dylib -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/liblibvariant.dylib -fPIC ${OBJECTFILES} ${LDLIBSOPTIONS} 
+
+${OBJECTDIR}/src/file.o: src/file.cpp 
+	${MKDIR} -p ${OBJECTDIR}/src
+	${RM} $@.d
+	$(COMPILE.cc) -O2 -fPIC  -MMD -MP -MF $@.d -o ${OBJECTDIR}/src/file.o src/file.cpp
 
 ${OBJECTDIR}/src/platform/osx/osxplatform.o: src/platform/osx/osxplatform.cpp 
 	${MKDIR} -p ${OBJECTDIR}/src/platform/osx
