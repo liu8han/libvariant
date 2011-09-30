@@ -1195,7 +1195,7 @@ bool Variant::ConvertToTimestamp ()
     if (detectedType == V_DATE || detectedType == V_TIMESTAMP)
     {
         temp.tm_year = (int) ((int32_t) (*this)["year"] - 1900);
-        temp.tm_mon = (int) ((int32_t) (*this)["month"]);
+        temp.tm_mon = (int) ((int32_t) (*this)["month"] - 1);
         temp.tm_mday = (int) ((int32_t) (*this)["day"]);
     }
     else
